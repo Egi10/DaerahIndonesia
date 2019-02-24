@@ -1,5 +1,6 @@
 package id.buaja.daerahindonesia.ui.provinsi
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import com.androidnetworking.AndroidNetworking
 import id.buaja.daerahindonesia.R
 import id.buaja.daerahindonesia.adapter.SemuaProvinsiAdapter
 import id.buaja.daerahindonesia.network.SemuaprovinsiItem
+import id.buaja.daerahindonesia.ui.kabupaten.KabupatenActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -36,7 +38,10 @@ class MainActivity : AppCompatActivity(), MainView {
         mainPresenter.getSemuaProvinsi()
 
         semuaProvinsiAdapter = SemuaProvinsiAdapter(this, listSemuaProvinsi) {
-
+            val intent = Intent(this, KabupatenActivity::class.java)
+            intent.putExtra("id_provinsi", it.id)
+            intent.putExtra("nama_provinsi", it.nama)
+            startActivity(intent)
         }
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = semuaProvinsiAdapter

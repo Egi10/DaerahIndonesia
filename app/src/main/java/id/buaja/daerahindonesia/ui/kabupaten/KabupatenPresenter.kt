@@ -1,4 +1,4 @@
-package id.buaja.daerahindonesia.ui.provinsi
+package id.buaja.daerahindonesia.ui.kabupaten
 
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
@@ -7,16 +7,17 @@ import com.androidnetworking.interfaces.ParsedRequestListener
 import id.buaja.daerahindonesia.BuildConfig
 import id.buaja.daerahindonesia.network.Response
 
-class MainPresenter(private val view: MainView) {
-    fun getSemuaProvinsi() {
+class KabupatenPresenter(private val view: KabupatenView) {
+    fun getKabupaten(idProvinsi: String?) {
         view.showLoading()
-        AndroidNetworking.get("${BuildConfig.BASE_URL}provinsi")
+        AndroidNetworking.get("${BuildConfig.BASE_URL}provinsi/{id_provinsi}/kabupaten")
+            .addPathParameter("id_provinsi", idProvinsi)
             .setTag(this)
             .setPriority(Priority.LOW)
             .build()
             .getAsObject(Response::class.java, object : ParsedRequestListener<Response> {
                 override fun onResponse(response: Response?) {
-                    view.onSuccess(response?.semuaprovinsi)
+                    view.onSuccess(response?.kabupatens)
                     view.hideLoading()
                 }
 
