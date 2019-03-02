@@ -14,5 +14,8 @@ data class Response(
 	val semuaprovinsi: List<SemuaprovinsiItem>? = null,
 
 	@field:SerializedName("kabupatens")
-	val kabupatens: List<KabupatensItem>? = null
+	val kabupatens: List<KabupatensItem>? = null,
+
+	@field:SerializedName("kecamatans")
+	val kecamatans: List<KecamatansItem>? = null
 )
